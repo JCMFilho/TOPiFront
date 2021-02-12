@@ -1,0 +1,123 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+</style>
+
+<!-- Toolbar -->
+<div>
+  <div class="toolbar" role="banner">
+    <span style="margin-left: 20px;font-size: 18px;">TOPi - Full Stack Developer Test</span>
+
+
+
+  </div>
+
+  <div style="margin-top: 20px;margin-left: 20px;">
+    <mat-tab-group (selectedTabChange)="tabChanged($event)" [selectedIndex]="tabAtual">
+      <mat-tab label="Pesquisar refeição" style="padding-top: 10px;">
+    <mat-form-field style="width: 20%;" appearance="outline" >
+      <mat-label>Digite a Refeição</mat-label>
+      <input matInput placeholder="Digite a refeição" [(ngModel)]="mealDigitado">
+    </mat-form-field>
+
+    <button mat-button (click)="pesquisarMeal()">
+      <mat-icon>search</mat-icon>
+  </button>
+  <div class="mat-elevation-z8" style="margin: 5px;" *ngIf="tabela.data.length > 0">
+    <table mat-table [dataSource]="tabela" style="width: 100%;">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strMeal}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Categoria </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strCategory}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="area">
+        <mat-header-cell *matHeaderCellDef>Area </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strArea}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="thumbnail">
+        <mat-header-cell *matHeaderCellDef>Thumbnail</mat-header-cell>
+        <mat-cell *matCellDef="let meal"> <img [src]="meal.strMealThumb" style="width: 80px;margin-top: 10px;margin-bottom: 10px;"> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="instructions">
+        <mat-header-cell *matHeaderCellDef>Instruções</mat-header-cell>
+        <mat-cell *matCellDef="let meal">
+          <button mat-raised-button (click)="abrirInstrucoes(meal.strInstructions,meal.strMealThumb)">
+          Mostrar instruções de preparo
+      </button> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="colunasTabela;" ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunasTabela;"></mat-row>
+    </table>
+    <mat-paginator #paginator [pageSize]="10" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</mat-tab>
+<mat-tab label="Refeições pesquisadas" style="padding-top: 10px;">
+
+
+
+  <div class="mat-elevation-z8" style="margin: 5px;" *ngIf="tabelaPesquisada.data.length > 0">
+    <table mat-table [dataSource]="tabelaPesquisada" style="width: 100%;">
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strMeal}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="category">
+        <mat-header-cell *matHeaderCellDef>Categoria </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strCategory}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="area">
+        <mat-header-cell *matHeaderCellDef>Area </mat-header-cell>
+        <mat-cell *matCellDef="let meal"> {{meal.strArea}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="thumbnail">
+        <mat-header-cell *matHeaderCellDef>Thumbnail</mat-header-cell>
+        <mat-cell *matCellDef="let meal"> <img [src]="meal.strMealThumb" style="width: 80px;margin-top: 10px;margin-bottom: 10px;"> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="instructions">
+        <mat-header-cell *matHeaderCellDef>Instruções</mat-header-cell>
+        <mat-cell *matCellDef="let meal">
+          <button mat-raised-button (click)="abrirInstrucoes(meal.strInstructions,meal.strMealThumb)">
+          Mostrar instruções de preparo
+      </button> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="colunasTabela;" ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunasTabela;"></mat-row>
+    </table>
+  </div>
+</mat-tab>
+</mat-tab-group>
+  </div>
+
+
+</div>
