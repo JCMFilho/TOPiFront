@@ -10,7 +10,8 @@ export class MealsService {
 
   constructor(private http: HttpClient) { }
 
-  private urlBase: string = "http://localhost:8080/api/meal";
+  //private urlBase: string = "http://localhost:8080/api/meal";
+  private urlBase: string = "https://limitless-castle-47887.herokuapp.com/api/meal";
 
   buscarMeals(meal):Observable<any>{
     return this.http.get(this.urlBase+'/buscar-meal/'+meal);
